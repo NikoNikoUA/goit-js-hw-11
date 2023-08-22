@@ -1,0 +1,7 @@
+form {
+  background-color: rgb(60, 244, 19);
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
