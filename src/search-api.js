@@ -1,8 +1,8 @@
-export function picturesSearch() {
+export function picturesSearch(inputValue) {
   const BASE_URL = 'https://pixabay.com/api/';
   const params = new URLSearchParams({
     key: '38986631-ae11b42db00bd05f0f2571500',
-    // q: 'target.value',
+    q: inputValue,
     image_type: 'photo',
     orientation: 'horizontal',
     safesearch: true,
