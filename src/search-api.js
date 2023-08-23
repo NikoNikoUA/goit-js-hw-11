@@ -6,6 +6,8 @@ export function picturesSearch(inputValue) {
     image_type: 'photo',
     orientation: 'horizontal',
     safesearch: true,
+    page: 1,
+    per_page: 40,
   });
 
   return fetch(`${BASE_URL}?${params}`).then(response => {

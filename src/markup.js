@@ -1,28 +1,28 @@
 const gallery = document.querySelector('.gallery');
+const loadMoreBtn = document.querySelector('.load-more');
 
 export function serviceMarkup(pictures) {
-  const pictureInfo = pictures[0].hits[0];
-  console.log(pictureInfo);
-  const markup = pictures
+  const markup = pictures.hits
     .map(picture => {
       return `<div class="photo-card">
-            <img src="${pictureInfo.webformatURL}" alt="${pictureInfo.tags}" loading="lazy" />
+            <img src="${picture.webformatURL}" alt="${picture.tags}" width="300" height="200" loading="lazy" />
             <div class="info">
               <p class="info-item">
-                <b>Likes: ${pictureInfo.likes}</b>
+                <b>Likes: ${picture.likes}</b>
               </p>
               <p class="info-item">
-                <b>Views: ${pictureInfo.views}</b>
+                <b>Views: ${picture.views}</b>
               </p>
               <p class="info-item">
-                <b>Comments: ${pictureInfo.comments}</b>
+                <b>Comments: ${picture.comments}</b>
               </p>
               <p class="info-item">
-                <b>Downloads: ${pictureInfo.downloads}</b>
+                <b>Downloads: ${picture.downloads}</b>
               </p>
             </div>
           </div>`;
     })
     .join('');
   gallery.innerHTML = markup;
+  loadMoreBtn.classList.replace('load-more', 'button-79');
 }
