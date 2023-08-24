@@ -101,6 +101,6 @@ form {
   transform: translateY(0.125rem);
 }
 
-.load-more {
+.load-more-hidden {
   display: none;
 }

@@ -9,9 +9,9 @@ axios.defaults.headers.common['x-api-key'] = API_KEY;
 
 const form = document.querySelector('.search-form');
 const gallery = document.querySelector('.gallery');
-const loadMoreBtn = document.querySelector('.load-more');
+const loadMoreBtn = document.querySelector('.load-more-hidden');
 let inputValue = '';
-let page = 1;
+let currentPage = 1;
 
 loadMoreBtn.addEventListener('click', onLoadMore);
 form.addEventListener('submit', onFormSubmit);
@@ -20,11 +20,11 @@ function onFormSubmit(event) {
   inputValue = event.target.elements.searchQuery.value;
   event.preventDefault();
   event.target.reset();
-  picturesSearch(inputValue)
+  picturesSearch(inputValue, currentPage)
     .then(pictures => {
       if (pictures.hits.length === 0) {
         gallery.innerHTML = '';
-        loadMoreBtn.classList.replace('button-79', 'load-more');
+        loadMoreBtn.classList.replace('button-79', 'load-more-hidden');
         Notify.failure(
           'Sorry, there are no images matching your search query. Please try again.',
           {
@@ -34,12 +34,15 @@ function onFormSubmit(event) {
           }
         );
       } else {
-        serviceMarkup(pictures),
-          Notify.success('Hurrah! Here is the result of your request.', {
-            width: '400px',
-            borderRadius: '10px',
-            position: 'right-corner',
-          });
+        serviceMarkup(pictures);
+        Notify.success('Hurrah! Here is the result of your request.', {
+          width: '400px',
+          borderRadius: '10px',
+          position: 'right-corner',
+        });
+        if (currentPage < pictures.totalHits) {
+          loadMoreBtn.classList.replace('load-more-hidden', 'button-79');
+        }
       }
     })
     .catch(error => {
@@ -51,12 +54,13 @@ function onFormSubmit(event) {
     });
 }
 
-function onLoadMore(page) {
-  loadMoreBtn.classList.replace('button-79', 'load-more');
-  // page += 1;
-  // picturesSearch(inputValue).then(data => {
-  //   gallery.insertAdjacentElement('beforeend', serviceMarkup(data.hits));
-  // });
-  // if (data.params.page >= data.totalHits) {
-  // }
+function onLoadMore() {
+  currentPage += 1;
+  picturesSearch(inputValue, currentPage).then(pictures => {
+    console.log(pictures);
+    gallery.insertAdjacentHTML('beforeend', serviceMarkup(pictures));
+    if (currentPage >= pictures.totalHits) {
+      loadMoreBtn.classList.replace('button-79', 'load-more-hidden');
+    }
+  });
 }
