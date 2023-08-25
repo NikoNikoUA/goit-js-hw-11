@@ -38,7 +38,7 @@ function onFormSubmit(event) {
           }
         );
       } else {
-        serviceMarkup(pictures);
+        gallery.innerHTML = serviceMarkup(pictures);
         lightbox.refresh();
 
         Notify.success('Hurrah! Here is the result of your request.', {

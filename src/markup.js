@@ -26,5 +26,5 @@ export function serviceMarkup(pictures) {
           `;
     })
     .join('');
-  gallery.insertAdjacentHTML('beforeend', markup);
+  return markup;
 }
