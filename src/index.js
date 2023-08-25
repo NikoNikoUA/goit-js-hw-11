@@ -61,6 +61,14 @@ function onLoadMore() {
     gallery.insertAdjacentHTML('beforeend', serviceMarkup(pictures));
     if (currentPage >= pictures.totalHits) {
       loadMoreBtn.classList.replace('button-79', 'load-more-hidden');
+      Notify.failure(
+        "We're sorry, but you've reached the end of search results.",
+        {
+          width: '400px',
+          borderRadius: '10px',
+          position: 'center-center',
+        }
+      );
     }
   });
 }
