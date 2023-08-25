@@ -1,5 +1,4 @@
 const gallery = document.querySelector('.gallery');
-const loadMoreBtn = document.querySelector('.load-more-hidden');
 
 export function serviceMarkup(pictures) {
   const markup = pictures.hits
@@ -24,5 +23,4 @@ export function serviceMarkup(pictures) {
     })
     .join('');
   gallery.insertAdjacentHTML('beforeend', markup);
-  loadMoreBtn.classList.replace('load-more-hidden', 'button-79');
 }
