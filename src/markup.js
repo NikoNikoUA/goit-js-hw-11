@@ -3,8 +3,11 @@ const gallery = document.querySelector('.gallery');
 export function serviceMarkup(pictures) {
   const markup = pictures.hits
     .map(picture => {
-      return `<div class="photo-card">
-            <img src="${picture.webformatURL}" alt="${picture.tags}" width="300" height="200" loading="lazy" />
+      return ` 
+           <div class="photo-card">
+            <a class="gallery-link link" href="${picture.largeImageURL}">
+                <img src="${picture.webformatURL}" alt="${picture.tags}" width="300" height="200" loading="lazy" />
+            </a>
             <div class="info">
               <p class="info-item">
                 <b>Likes: ${picture.likes}</b>
@@ -19,7 +22,8 @@ export function serviceMarkup(pictures) {
                 <b>Downloads: ${picture.downloads}</b>
               </p>
             </div>
-          </div>`;
+            </div>
+          `;
     })
     .join('');
   gallery.insertAdjacentHTML('beforeend', markup);
