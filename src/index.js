@@ -5,13 +5,15 @@ import { picturesSearch } from './search-api.js';
 import { serviceMarkup } from './markup.js';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
+import { loadMoreShow, loadMoreHide } from './load-more.js';
 
 const API_KEY = '38986631-ae11b42db00bd05f0f2571500';
 axios.defaults.headers.common['x-api-key'] = API_KEY;
 
 const form = document.querySelector('.search-form');
 const gallery = document.querySelector('.gallery');
-const loadMoreBtn = document.querySelector('.load-more-hidden');
+const loadMoreBtn = document.querySelector('.js-load-more');
+const finalText = document.querySelector('.js-final-text');
 let inputValue = '';
 let currentPage = 1;
 const lightbox = new SimpleLightbox('.gallery a');
@@ -26,9 +28,20 @@ function onFormSubmit(event) {
   event.target.reset();
   picturesSearch(inputValue, currentPage)
     .then(pictures => {
-      if (pictures.hits.length === 0) {
+      totalHits = pictures.totalHits;
+      if (totalHits === 0) {
         gallery.innerHTML = '';
-        loadMoreBtn.classList.replace('button-79', 'load-more-hidden');
+        loadMoreHide();
+        Notify.failure(
+          'Sorry, there are no images matching your search query. Please try again.',
+          {
+            width: '400px',
+            borderRadius: '10px',
+            position: 'right-corner',
+          }
+        );
+      } else if (inputValue === '') {
+        gallery.innerHTML = '';
         Notify.failure(
           'Sorry, there are no images matching your search query. Please try again.',
           {
@@ -40,15 +53,13 @@ function onFormSubmit(event) {
       } else {
         gallery.innerHTML = serviceMarkup(pictures);
         lightbox.refresh();
+        loadMoreShow();
 
-        Notify.success('Hurrah! Here is the result of your request.', {
+        Notify.success(`Hooray! We found ${totalHits} images.`, {
           width: '400px',
           borderRadius: '10px',
           position: 'right-corner',
         });
-        if (currentPage < pictures.totalHits) {
-          loadMoreBtn.classList.replace('load-more-hidden', 'button-79');
-        }
       }
     })
     .catch(error => {
@@ -62,21 +73,16 @@ function onFormSubmit(event) {
 
 function onLoadMore() {
   currentPage += 1;
-  picturesSearch(inputValue, currentPage).then(pictures => {
-    gallery.insertAdjacentHTML('beforeend', serviceMarkup(pictures));
 
+  picturesSearch(inputValue, currentPage).then(pictures => {
+    totalHits = pictures.totalHits;
+    const picturesPerPage = pictures.hits.length;
+    gallery.insertAdjacentHTML('beforeend', serviceMarkup(pictures));
     lightbox.refresh();
 
-    if (currentPage >= pictures.totalHits) {
-      loadMoreBtn.classList.replace('button-79', 'load-more-hidden');
-      Notify.failure(
-        "We're sorry, but you've reached the end of search results.",
-        {
-          width: '400px',
-          borderRadius: '10px',
-          position: 'center-center',
-        }
-      );
+    if (picturesPerPage * currentPage >= totalHits) {
+      loadMoreHide();
+      finalText.classList.replace('final-text-hidden', 'final-text');
     }
   });
 }

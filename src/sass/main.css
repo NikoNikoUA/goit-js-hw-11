@@ -112,3 +112,12 @@ form {
 .load-more-hidden {
   display: none;
 }
+
+.final-text {
+  font-size: 20px;
+  text-align: center;
+}
+
+.final-text-hidden {
+  display: none;
+}

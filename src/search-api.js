@@ -7,7 +7,7 @@ export function picturesSearch(inputValue, currentPage = '1') {
     orientation: 'horizontal',
     safesearch: true,
     page: currentPage,
-    per_page: 100,
+    per_page: 200,
   });
 
   return fetch(`${BASE_URL}?${params}`).then(response => {
