@@ -29,12 +29,13 @@ function onFormSubmit(event) {
   inputValue = event.target.elements.searchQuery.value;
   event.preventDefault();
   event.target.reset();
+  loadMoreHide();
   picturesSearch(inputValue, currentPage)
     .then(pictures => {
       totalHits = pictures.totalHits;
+      totalPages = Math.ceil(totalHits / 40);
       if (totalHits === 0) {
         gallery.innerHTML = '';
-        loadMoreHide();
         Notify.failure(
           'Sorry, there are no images matching your search query. Please try again.',
           {
@@ -57,7 +58,6 @@ function onFormSubmit(event) {
         gallery.innerHTML = serviceMarkup(pictures);
         lightbox.refresh();
         loadMoreShow();
-
         Notify.success(`Hooray! We found ${totalHits} images.`, {
           width: '400px',
           borderRadius: '10px',
