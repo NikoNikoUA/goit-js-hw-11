@@ -1,5 +1,3 @@
-const gallery = document.querySelector('.gallery');
-
 const defaults = {
   webformatURL:
     'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg',
@@ -11,8 +9,8 @@ const defaults = {
   comments: '0',
 };
 
-export function serviceMarkup(pictures) {
-  const markup = pictures.hits
+export function serviceMarkup(picturesFromBackend) {
+  const markup = picturesFromBackend.hits
     .map(
       ({
         largeImageURL,

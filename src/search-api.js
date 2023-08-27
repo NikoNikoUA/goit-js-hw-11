@@ -1,4 +1,8 @@
-export function picturesSearch(inputValue, currentPage = '1') {
+import axios from 'axios';
+const API_KEY = '38986631-ae11b42db00bd05f0f2571500';
+axios.defaults.headers.common['x-api-key'] = API_KEY;
+
+export async function picturesSearch(inputValue, currentPage = '1') {
   const BASE_URL = 'https://pixabay.com/api/';
   const params = new URLSearchParams({
     key: '38986631-ae11b42db00bd05f0f2571500',
@@ -10,10 +14,14 @@ export function picturesSearch(inputValue, currentPage = '1') {
     per_page: 40,
   });
 
-  return fetch(`${BASE_URL}?${params}`).then(response => {
-    if (!response.ok) {
-      throw new Error(response.statusText);
-    }
-    return response.json();
-  });
+  const response = await axios.get(`${BASE_URL}?${params}`);
+
+  return response;
 }
+
+// return axios.get(`${BASE_URL}?${params}`).then(response => {
+//   if (!response.ok) {
+//     throw new Error(response.statusText);
+//   }
+//   return response;
+// });
