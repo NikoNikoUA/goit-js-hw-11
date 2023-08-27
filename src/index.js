@@ -16,12 +16,15 @@ const loadMoreBtn = document.querySelector('.js-load-more');
 const finalText = document.querySelector('.js-final-text');
 let inputValue = '';
 let currentPage = 1;
+let totalPages = 0;
+let totalHits = 0;
 const lightbox = new SimpleLightbox('.gallery a');
 
 loadMoreBtn.addEventListener('click', onLoadMore);
 form.addEventListener('submit', onFormSubmit);
 
 function onFormSubmit(event) {
+  finalText.classList.replace('final-text', 'final-text-hidden');
   gallery.innerHTML = '';
   inputValue = event.target.elements.searchQuery.value;
   event.preventDefault();
@@ -76,11 +79,16 @@ function onLoadMore() {
 
   picturesSearch(inputValue, currentPage).then(pictures => {
     totalHits = pictures.totalHits;
+    totalPages = Math.ceil(totalHits / 40);
     const picturesPerPage = pictures.hits.length;
     gallery.insertAdjacentHTML('beforeend', serviceMarkup(pictures));
     lightbox.refresh();
 
     if (picturesPerPage * currentPage >= totalHits) {
+      loadMoreHide();
+      // finalText.classList.replace('final-text-hidden', 'final-text');
+    }
+    if (currentPage >= totalPages) {
       loadMoreHide();
       finalText.classList.replace('final-text-hidden', 'final-text');
     }

@@ -6,9 +6,9 @@ const defaults = {
   largeImageURL:
     'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg',
   tags: 'no description',
-  likes: 'xx',
-  views: 'xx',
-  comments: 'xx',
+  likes: '0',
+  views: '0',
+  comments: '0',
 };
 
 export function serviceMarkup(pictures) {
