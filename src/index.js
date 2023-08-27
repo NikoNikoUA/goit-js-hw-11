@@ -86,7 +86,7 @@ function onLoadMore() {
 
     if (picturesPerPage * currentPage >= totalHits) {
       loadMoreHide();
-      // finalText.classList.replace('final-text-hidden', 'final-text');
+      finalText.classList.replace('final-text-hidden', 'final-text');
     }
     if (currentPage >= totalPages) {
       loadMoreHide();
