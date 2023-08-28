@@ -8,9 +8,6 @@ import { loadMoreShow, loadMoreHide } from './load-more.js';
 
 const API_KEY = '38986631-ae11b42db00bd05f0f2571500';
 axios.defaults.headers.common['x-api-key'] = API_KEY;
-// axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-// axios.defaults.headers.common['Content-Type'] = 'application/json';
-// axios.defaults.headers.common['Referrer-policy'] = 'no-referrer-when-downgrade';
 
 const form = document.querySelector('.search-form');
 const gallery = document.querySelector('.gallery');

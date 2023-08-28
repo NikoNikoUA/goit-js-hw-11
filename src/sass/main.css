@@ -121,3 +121,50 @@ form {
 .final-text-hidden {
   display: none;
 }
+
+input {
+  border-radius: 20px;
+  height: 60px;
+  padding: 10px;
+  margin-right: 10px;
+  border: none;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.btn {
+  border-radius: 50%;
+  background-color: rgb(13, 14, 14);
+  height: 60px;
+  width: 60px;
+  color: white;
+  box-shadow: 1 2 2 0.5;
+}
+
+.search-form {
+  display: flex;
+  align-items: center;
+}
+
+.scroll {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  border: none;
+  background-color: #787878;
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+body {
+  position: relative;
+}
+
+.svg {
+  fill: white;
+}
