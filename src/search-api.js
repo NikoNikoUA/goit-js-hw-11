@@ -1,6 +1,10 @@
 import axios from 'axios';
 const API_KEY = '38986631-ae11b42db00bd05f0f2571500';
 axios.defaults.headers.common['x-api-key'] = API_KEY;
+// axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+// axios.defaults.headers.common['Content-Type'] =
+//   'application/x-www-form-urlencoded';
+// axios.defaults.headers.common['Referrer-policy'] = 'no-referrer-when-downgrade';
 
 export async function picturesSearch(inputValue, currentPage = '1') {
   const BASE_URL = 'https://pixabay.com/api/';
