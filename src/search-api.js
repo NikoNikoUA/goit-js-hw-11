@@ -18,6 +18,7 @@ export async function picturesSearch(inputValue, currentPage = '1') {
   return response;
 }
 
+// USING FETCH
 // return axios.get(`${BASE_URL}?${params}`).then(response => {
 //   if (!response.ok) {
 //     throw new Error(response.statusText);

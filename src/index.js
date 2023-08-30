@@ -6,8 +6,6 @@ import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import { loadMoreShow, loadMoreHide } from './load-more.js';
 
-// const API_KEY = '38986631-ae11b42db00bd05f0f2571500';
-
 const form = document.querySelector('.search-form');
 const gallery = document.querySelector('.gallery');
 const loadMoreBtn = document.querySelector('.js-load-more');
