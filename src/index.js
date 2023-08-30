@@ -6,8 +6,7 @@ import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import { loadMoreShow, loadMoreHide } from './load-more.js';
 
-const API_KEY = '38986631-ae11b42db00bd05f0f2571500';
-axios.defaults.headers.common['x-api-key'] = API_KEY;
+// const API_KEY = '38986631-ae11b42db00bd05f0f2571500';
 
 const form = document.querySelector('.search-form');
 const gallery = document.querySelector('.gallery');
@@ -31,9 +30,7 @@ async function onFormSubmit(event) {
     event.target.reset();
     loadMoreHide();
     const picturesFromBackend = await picturesSearch(inputValue, currentPage);
-    console.log(picturesFromBackend);
-    totalHits = picturesFromBackend.totalHits;
-    console.log(totalHits);
+    totalHits = picturesFromBackend.data.totalHits;
     totalPages = Math.ceil(totalHits / 40);
     if (totalHits === 0) {
       gallery.innerHTML = '';
@@ -79,10 +76,9 @@ async function onLoadMore() {
     currentPage += 1;
 
     const picturesFromBackend = await picturesSearch(inputValue, currentPage);
-    // const newPics = pictures;
-    totalHits = picturesFromBackend.totalHits;
+    totalHits = picturesFromBackend.data.totalHits;
     totalPages = Math.ceil(totalHits / 40);
-    const picturesPerPage = picturesFromBackend.hits.length;
+    const picturesPerPage = picturesFromBackend.data.hits.length;
     gallery.insertAdjacentHTML('beforeend', serviceMarkup(picturesFromBackend));
     lightbox.refresh();
 
