@@ -40,7 +40,7 @@ async function onFormSubmit(event) {
           position: 'right-corner',
         }
       );
-    } else if (inputValue === '') {
+    } else if (inputValue.trim() === '') {
       gallery.innerHTML = '';
       Notify.failure(
         'Sorry, there are no images matching your search query. Please try again.',
