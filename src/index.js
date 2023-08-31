@@ -21,6 +21,7 @@ form.addEventListener('submit', onFormSubmit);
 
 async function onFormSubmit(event) {
   try {
+    currentPage = 1;
     finalText.classList.replace('final-text', 'final-text-hidden');
     gallery.innerHTML = '';
     inputValue = event.target.elements.searchQuery.value;
